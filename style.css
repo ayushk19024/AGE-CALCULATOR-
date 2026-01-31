@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Background Video */
+#bg-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Main Card */
+.container {
+  width: 400px;
+  margin: 60px auto;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 18px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 204, 0, 0.3);
+}
+
+h1 {
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #ffcc00, #ff66cc, #66ccff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  margin-top: 15px;
+  background: linear-gradient(90deg, #ffcc00, #ff9900);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+#result {
+  margin-top: 15px;
+  text-align: left;
+  font-size: 14px;
+}
+
+/* Footer Styling */
+.footer {
+  margin-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 10px;
+}
+
+.dev {
+  font-size: 14px;
+}
+
+.dev span {
+  background: linear-gradient(90deg, #00ffcc, #ff66cc, #ffcc00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #ffcc00; }
+  to { text-shadow: 0 0 15px #ff66cc; }
+}
+
+.student {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.contact {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 13px;
+}
+
+.contact a {
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  color: #00ffcc;
+}

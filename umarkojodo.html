@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Age Calculator</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+/* Video Background */
+#bg-video{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-1;
+}
+
+/* Glass Container */
+.container{
+  width:92%;
+  max-width:400px;
+  margin:50px auto;
+  background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(10px);
+  padding:25px;
+  border-radius:18px;
+  color:white;
+  text-align:center;
+  box-shadow:0 0 25px rgba(255,204,0,0.4);
+}
+
+h1{
+  margin-bottom:15px;
+  background:linear-gradient(90deg,#ffcc00,#ff66cc,#66ccff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+label{
+  display:block;
+  text-align:left;
+  margin-top:10px;
+  font-size:14px;
+}
+
+input,button{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border-radius:8px;
+  border:none;
+}
+
+button{
+  margin-top:15px;
+  background:linear-gradient(90deg,#ffcc00,#ff9900);
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{transform:scale(1.03);}
+
+#result{
+  margin-top:15px;
+  font-size:14px;
+  text-align:left;
+}
+
+/* Progress Bar */
+.progress{
+  width:100%;
+  height:8px;
+  background:#333;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#00ffcc,#ffcc00);
+}
+
+/* Footer */
+.footer{
+  margin-top:18px;
+  border-top:1px solid rgba(255,255,255,0.2);
+  padding-top:10px;
+}
+
+.dev span{
+  background:linear-gradient(90deg,#00ffcc,#ff66cc,#ffcc00);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight:bold;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 5px #ffcc00;}
+  to{text-shadow:0 0 15px #ff66cc;}
+}
+
+.student{font-size:12px;opacity:0.9;}
+
+.contact{
+  margin-top:8px;
+  display:flex;
+  justify-content:space-around;
+  font-size:13px;
+}
+
+.contact a{
+  color:#ffcc00;
+  text-decoration:none;
+}
+
+.contact a:hover{color:#00ffcc;}
+</style>
+</head>
+
+<body>
+
+<!-- Live Anime Background -->
+<video autoplay muted loop playsinline id="bg-video">
+  <source src="videoplayback.mp4" type="video/mp4">
+</video>
+
+<div class="container">
+  <h1>AGE CALCULATOR</h1>
+
+  <label>Date of Birth</label>
+  <input type="date" id="dob">
+
+  <button onclick="startLiveAge()">Calculate Age</button>
+
+  <div id="result"></div>
+
+  <p>Birthday Progress</p>
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="footer">
+    <p class="dev">🚀 Developed by <span>Ayush Kumar</span></p>
+    <p class="student">BCA AI Student at <b>JNCU</b></p>
+    <div class="contact">
+      <a href="https://instagram.com/eathical_coder" target="_blank">📸 @eathical_coder</a>
+      <a href="mailto:ayushk19024@gmail.com">✉️ ayushk19024@gmail.com</a>
+    </div>
+  </div>
+</div>
+
+<script>
+let timer;
+
+function startLiveAge(){
+  clearInterval(timer);
+  let dob=document.getElementById("dob").value;
+  if(!dob){alert("Please enter DOB");return;}
+
+  let birthDate=new Date(dob);
+
+  timer=setInterval(()=>{
+    let now=new Date();
+    let diff=now-birthDate;
+
+    let totalSeconds=Math.floor(diff/1000);
+    let minutes=Math.floor(totalSeconds/60);
+    let hours=Math.floor(minutes/60);
+    let days=Math.floor(hours/24);
+    let years=Math.floor(days/365);
+
+    let remDays=days%365;
+    let remHours=hours%24;
+    let remMinutes=minutes%60;
+    let remSeconds=totalSeconds%60;
+
+    document.getElementById("result").innerHTML=`
+      <p><b>Live Age:</b></p>
+      <p>${years} Years ${remDays} Days</p>
+      <p>${remHours} Hours ${remMinutes} Minutes ${remSeconds} Seconds</p>
+    `;
+
+    let lastBirthday=new Date(now.getFullYear(),birthDate.getMonth(),birthDate.getDate());
+    if(lastBirthday>now) lastBirthday.setFullYear(now.getFullYear()-1);
+    let nextBirthday=new Date(lastBirthday);
+    nextBirthday.setFullYear(lastBirthday.getFullYear()+1);
+
+    let progress=((now-lastBirthday)/(nextBirthday-lastBirthday))*100;
+    document.getElementById("progressBar").style.width=progress+"%";
+
+  },1000);
+}
+</script>
+
+</body>
+</html>
